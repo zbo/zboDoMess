@@ -55,14 +55,15 @@ def get_cate(cate):
 
 def copy_row(target_sheet, source_sheet, index):
     target_row = target_sheet.max_row+1
-    for c in range(1, source_sheet.max_column):
+    for c in range(1, source_sheet.max_column+1):
         target_cell = target_sheet.cell(row=target_row, column=c)
         source_cell = source_sheet.cell(row=index, column=c)
         target_cell.value = source_cell.value
         target_cell.fill = PatternFill("solid", fgColor=source_cell.fill.fgColor)
         thin = Side(border_style="thin", color="000000")
         target_cell.border = Border(top=thin, left=thin, right=thin, bottom=thin)
-
+        if target_cell.column_letter not in ['A','B','C']:
+            target_sheet.column_dimensions[target_cell.column_letter].width = 3
 
 if __name__ == '__main__':
     index = 2

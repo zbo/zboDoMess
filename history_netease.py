@@ -109,6 +109,8 @@ def gen_excel(data_bag):
                 c.fill = PatternFill("solid", fgColor="6cac44")
             elif -9 <= va < -5:
                 c.fill = PatternFill("solid", fgColor="003300")
+            if c.column_letter not in ['A', 'B']:
+                ws.column_dimensions[c.column_letter].width = 3
 
 
 if __name__ == '__main__':
@@ -147,4 +149,4 @@ if __name__ == '__main__':
             index, len(s.each_day)))
 
     gen_excel(data_bag)
-    wb.save('history.xlsx')
+    wb.save('/Users/zhubo/Documents/history.xlsx')

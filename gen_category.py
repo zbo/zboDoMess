@@ -65,6 +65,17 @@ def copy_row(target_sheet, source_sheet, index):
         if target_cell.column_letter not in ['A','B','C']:
             target_sheet.column_dimensions[target_cell.column_letter].width = 3
 
+
+def copy_title(target_sheet, source_sheet):
+    for c in range(1, source_sheet.max_column + 1):
+        target_cell = target_sheet.cell(row=1, column=c)
+        source_cell = source_sheet.cell(row=1, column=c)
+        target_cell.value = source_cell.value
+        target_cell.fill = PatternFill("solid", fgColor=source_cell.fill.fgColor)
+        thin = Side(border_style="thin", color="000000")
+        target_cell.border = Border(top=thin, left=thin, right=thin, bottom=thin)
+
+
 if __name__ == '__main__':
     index = 2
     category = get_categoty()
@@ -72,15 +83,20 @@ if __name__ == '__main__':
     others = get_others()
     # print(others)
     for item in existing:
-        if item[0] not in wb_out.sheetnames:
-            ws = wb_out.create_sheet(title=item[0])
         if '其他' not in wb_out.sheetnames:
             ws = wb_out.create_sheet('其他')
+        if item[0] not in wb_out.sheetnames:
+            ws = wb_out.create_sheet(title=item[0])
     wb_out.save(fileout)
+
     index = 2
     while sheet_ranges['c{0}'.format(index)].value is not None:
         cate = sheet_ranges['c{0}'.format(index)].value
         fix_cate = get_cate(cate)
         copy_row(wb_out[fix_cate], sheet_ranges, index)
         index = index + 1
+    for name in wb_out.sheetnames:
+        copy_title(wb_out[name],sheet_ranges)
+    sheet1 = wb_out['Sheet']
+    wb_out.remove(sheet1)
     wb_out.save(fileout)

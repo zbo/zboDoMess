@@ -38,7 +38,7 @@ def get_others():
         reader = csv.reader(f)
         for row in reader:
             existing.append(row)
-            all_array.extend(row[1:])
+            all_array.extend(row)
     for s in category:
         if s in all_array:
             continue
@@ -47,10 +47,14 @@ def get_others():
 
 
 def get_cate(cate):
+    cates = []
     for item in existing:
         if cate in item:
-            return item[0]
-    return '其他'
+            cates.append(item[0])
+    if len(cates) >= 1:
+        return cates
+    else:
+        return ['其他']
 
 
 def copy_row(target_sheet, source_sheet, index):
@@ -79,12 +83,13 @@ def copy_title(target_sheet, source_sheet):
 
 
 def generate_cate_sheet():
-    global index, category, others, cate, name
+    # global index, category, others, cate, name
     index = 2
     while high_sheet['c{0}'.format(index)].value is not None:
         cate = high_sheet['c{0}'.format(index)].value
-        fix_cate = get_cate(cate)
-        copy_row(wb_out[fix_cate], high_sheet, index)
+        fix_cates = get_cate(cate)
+        for fxc in fix_cates:
+            copy_row(wb_out[fxc], high_sheet, index)
         index = index + 1
     for name in wb_out.sheetnames:
         copy_title(wb_out[name], high_sheet)

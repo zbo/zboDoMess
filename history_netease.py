@@ -20,22 +20,22 @@ ws = wb.active
 
 def gen_meta():
     with open('list.csv', 'r') as f:
-        reader = csv.reader(f)
-        all_codes = []
-        all_urls = []
-        for row in reader:
-            if row in all_codes:
+        meta_csv_reader = csv.reader(f)
+        meta_all_codes = []
+        meta_all_urls = []
+        for row in meta_csv_reader:
+            if row in meta_all_codes:
                 print(row)
                 continue
-            all_codes.append(row)
+            meta_all_codes.append(row)
             code = row[0].split('.')[0]
             mkt = '0'
             if row[0].split('.')[1].lower() == 'sz':
                 mkt = '1'
-            ncode = mkt + code
-            url_formatted = url_format.format(ncode)
-            all_urls.append(url_formatted)
-        return all_urls, all_codes
+            n_code = mkt + code
+            url_formatted = url_format.format(n_code)
+            meta_all_urls.append(url_formatted)
+        return meta_all_urls, meta_all_codes
 
 
 class Stock:
@@ -52,8 +52,8 @@ class Stock:
         self.each_day.append(day)
 
 
-def fileExist(filename):
-    if os.path.exists('./store/{0}'.format(filename)):
+def file_exist(file_name):
+    if os.path.exists('./store/{0}'.format(file_name)):
         return True
     return False
 
@@ -120,7 +120,7 @@ if __name__ == '__main__':
     for u in all_urls:
         s = Stock()
         filename = all_codes[index][0] + '.csv'
-        if not fileExist(filename):
+        if not file_exist(filename):
             print(u)
             response = requests.get(u)
             f = StringIO(response.text)

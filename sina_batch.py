@@ -8,7 +8,7 @@ import time
 
 def get_request(bat_arr):
     query_string = ','.join(bat_arr)
-    req_str = 'http://hq.sinajs.cn/list={0}'.format(query_string)
+    req_str = 'https://hq.sinajs.cn/list={0}'.format(query_string)
     return req_str
 
 
@@ -29,7 +29,7 @@ with open('list.csv', 'r') as f:
         mkt = code.split('.')[1]
         code = mkt.lower() + num
         batch_array.append(code)
-        if len(batch_array) == 10:
+        if len(batch_array) == 20:
             request_string = get_request(batch_array)
             request_array.append(request_string)
             batch_array = []
@@ -40,7 +40,8 @@ with open('list.csv', 'r') as f:
     for request in request_array:
         print(request)
         time.sleep(1)
-        response = requests.get(request)
+        header = {'Referer':'https://finance.sina.com.cn'}
+        response = requests.get(request,headers=header)
         ten_batch = response.text.split(';')
         for one in ten_batch:
             if len(one) > 4:
@@ -66,7 +67,9 @@ with open('list.csv', 'r') as f:
         ws["C{0}".format(index)] = gap
         thin = Side(border_style="thin", color="000000")
         ws["C{0}".format(index)].border = Border(top=thin, left=thin, right=thin, bottom=thin)
-
+        ws.column_dimensions['A'].width = 3
+        ws.column_dimensions['B'].width = 3
+        ws.column_dimensions['C'].width = 3
         # fill in color
         if buy_1 == '0':
             ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="000001")

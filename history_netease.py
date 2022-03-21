@@ -130,7 +130,7 @@ if __name__ == '__main__':
             for line in csv_reader:
                 csv_writer.writerow(line)
             f_local.close()
-            time.sleep(0.2)
+            time.sleep(1)
 
         f_local = open('./store/{0}'.format(filename), 'r')
         reader = csv.reader(f_local, delimiter=',')

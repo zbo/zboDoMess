@@ -7,3 +7,5 @@ history.xlsx
 .DS_Store
 .vscode/*
 automac/*
+./list.csv
+./raw.txt

@@ -1,6 +1,6 @@
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
-from openpyxl.styles import Border, Side
+from openpyxl.styles import Border, Side, Font
 import csv,os
 from openpyxl import Workbook
 
@@ -63,6 +63,7 @@ def copy_row(target_sheet, source_sheet, index):
         target_cell.fill = PatternFill("solid", fgColor=source_cell.fill.fgColor)
         thin = Side(border_style="thin", color="000000")
         target_cell.border = Border(top=thin, left=thin, right=thin, bottom=thin)
+        target_cell.font = Font(name='华文楷体')
         if target_cell.column_letter not in ['A', 'B', 'C']:
             target_sheet.column_dimensions[target_cell.column_letter].width = 3
 

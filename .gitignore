@@ -3,6 +3,7 @@ venv/*
 store/*
 sina/*
 balances.xlsx
+history.xlsx
 .DS_Store
 .vscode/*
 automac/*

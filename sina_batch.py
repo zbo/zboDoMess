@@ -78,12 +78,12 @@ with open('list.csv', 'r') as f:
         ws.column_dimensions['B'].width = 3
         ws.column_dimensions['C'].width = 3
         # fill in color
-        if buy_1 == '0':
-            ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="000001")
-            continue
-        if sell_1 == '0':
-            ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="FF0000")
-            continue
+        # if buy_1 == '0':
+        #     ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="000001")
+        #     continue
+        # if sell_1 == '0':
+        #     ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="FF0000")
+        #     continue
         if now_price > yesterday_close_prise:
             ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="ec7c24")
             if gap > 9:

@@ -15,7 +15,7 @@ others = []
 
 if os.path.exists(fileout):
     os.remove(fileout)
-    print('file deleted')
+    print('out file deleted')
 else:
     print('no such file:%s'%fileout)
 

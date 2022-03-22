@@ -15,7 +15,7 @@ fileout = '/Users/zhubo/Documents/in.xlsx'
 
 if os.path.exists(fileout):
     os.remove(fileout)
-    print('file deleted')
+    print('in file deleted')
 else:
     print('no such file:%s'%fileout)
 
@@ -86,7 +86,9 @@ with open('list.csv', 'r') as f:
             continue
         if now_price > yesterday_close_prise:
             ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="ec7c24")
-            if gap > 5:
+            if gap > 9:
+                ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="FF0000")
+            elif gap > 5:
                 ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="FF6600")
             elif gap < 1.5:
                 ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="FFCC00")

@@ -1,3 +1,5 @@
+#coding='utf-8'
+
 import csv
 import unittest
 from os import walk
@@ -88,10 +90,11 @@ if __name__ == '__main__':
     for f in files:
         data = load_data(f)
         peak_index = find_peak(data)
-        if peak_index > 5 or peak_index == 0:
+        if peak_index > 10 or peak_index == 0:
             continue
         data_range = data[:peak_index]
         high_vol = data[peak_index].vol
         if range_meet(data_range, high_vol):
             arr = f.split('.')
             print('{0}.{1}'.format(arr[0], arr[1]))
+            # print(data[0].name)

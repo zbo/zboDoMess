@@ -95,7 +95,9 @@ with open('list.csv', 'r') as f:
             continue
         if now_price <= yesterday_close_prise:
             ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="6cac44")
-            if gap < -5:
+            if gap < -9.5:
+                ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="000001")
+            elif gap < -5:
                 ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="003300")
             elif gap > -1.5:
                 ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="99CC00")

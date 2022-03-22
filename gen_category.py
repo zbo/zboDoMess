@@ -3,6 +3,7 @@ from openpyxl.styles import PatternFill
 from openpyxl.styles import Border, Side, Font
 import csv,os
 from openpyxl import Workbook
+import my_finding
 
 filein = '/Users/zhubo/Documents/中美对话周期.xlsx'
 fileout = '/Users/zhubo/Documents/out.xlsx'
@@ -104,6 +105,8 @@ def gen_sheet():
             wb_out.create_sheet('其他')
         if '高度' not in wb_out.sheetnames:
             wb_out.create_sheet('高度')
+        if '缩量' not in wb_out.sheetnames:
+            wb_out.create_sheet('缩量')
         if item[0] not in wb_out.sheetnames:
             wb_out.create_sheet(title=item[0])
     wb_out.save(fileout)
@@ -135,6 +138,15 @@ def generate_top_sheet():
                 copy_row(wb_out['高度'], high_sheet, i)
     wb_out.save(fileout)
 
+def generate_sl_sheet():
+    all_code = my_finding.logic()
+    for i in range(1, high_sheet.max_row):
+        if i == 1:
+            copy_title(wb_out['缩量'], high_sheet)
+        else:
+            if high_sheet.cell(row=i, column=1).value in all_code:
+                copy_row(wb_out['缩量'], high_sheet, i)
+    wb_out.save(fileout)
 
 if __name__ == '__main__':
     category = get_categoty()
@@ -144,3 +156,4 @@ if __name__ == '__main__':
     gen_sheet()
     generate_cate_sheet()
     generate_top_sheet()
+    generate_sl_sheet()

@@ -22,6 +22,7 @@ def get_cate_from_conf():
             all_cate.append(row[0])
     all_cate.append('其他')
     all_cate.append('高度')
+    all_cate.append('缩量')
     return all_cate
 
 def find_cell_from_in(code):

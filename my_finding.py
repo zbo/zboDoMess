@@ -83,8 +83,8 @@ def range_meet(data_range, high_vol):
     return meet
 
 
-if __name__ == '__main__':
-    # unittest.main()
+def logic():
+    code_list=[]
     files = get_all_files()
     print(len(files))
     for f in files:
@@ -96,5 +96,11 @@ if __name__ == '__main__':
         high_vol = data[peak_index].vol
         if range_meet(data_range, high_vol):
             arr = f.split('.')
-            print('{0}.{1}'.format(arr[0], arr[1]))
+            code_list.append('{0}.{1}'.format(arr[0], arr[1]))
             # print(data[0].name)
+    return code_list
+
+
+if __name__ == '__main__':
+    # unittest.main()
+    print(logic())

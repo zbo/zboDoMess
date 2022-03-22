@@ -66,9 +66,12 @@ class TestStringMethods(unittest.TestCase):
 if __name__ == '__main__':
     #unittest.main()
     files = get_all_files()
-    data = load_data('002246.sz.csv')
-    peak_index = find_peak(data)
-    print(data[peak_index].high)
-    print(data[peak_index].vol)
+
     print(len(files))
+    for f in files:
+        data = load_data(f)
+        peak_index = find_peak(data)
+        print(data[peak_index].high)
+        print(data[peak_index].vol)
+        
     

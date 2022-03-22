@@ -11,12 +11,18 @@ import time
 import requests
 from openpyxl.styles.builtins import styles
 
-url_format = 'http://quotes.money.163.com/service/chddata.html?code={0}&start=20220101&end=20221231&fields=PCHG'
+fileout = '/Users/zhubo/Documents/history.xlsx'
+url_format = 'http://quotes.money.163.com/service/chddata.html?code={0}&start=20220101&end=20221231'
 # url_format = 'http://quotes.money.163.com/service/chddata.html?code={0}&start=20201115&end=20210126&fields=PCHG'
 
 wb = Workbook()
 ws = wb.active
 
+if os.path.exists(fileout):
+    os.remove(fileout)
+    print('history file deleted')
+else:
+    print('no such file:%s'%fileout)
 
 def gen_meta():
     with open('list.csv', 'r') as f:
@@ -138,7 +144,7 @@ if __name__ == '__main__':
         for row in reader:
             if reader.line_num == 1:
                 continue
-            s.add_Item(row[3])
+            s.add_Item(row[9])
             s.add_Day(row[0])
             s.name = row[2]
             s.code = all_codes[index][0]
@@ -149,4 +155,4 @@ if __name__ == '__main__':
             index, len(s.each_day)))
 
     gen_excel(data_bag)
-    wb.save('/Users/zhubo/Documents/history.xlsx')
+    wb.save(fileout)

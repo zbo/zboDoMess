@@ -4,11 +4,12 @@ from os import walk
 
 '''模式查找范围10天'''
 scanrange = 10
-image_template = '<figure class="third"><img src="http://image.sinajs.cn/newchart/daily/n/{0}.gif" width="50%">'\
-'<img src="http://image.sinajs.cn/newchart/min/n/{1}.gif" width="50%"></figure>'
+image_template = '<figure class="third"><img src="http://image.sinajs.cn/newchart/daily/n/{0}.gif" width="50%">' \
+                 '<img src="http://image.sinajs.cn/newchart/min/n/{1}.gif" width="50%"></figure>'
 link_template = 'http://vip.stock.finance.sina.com.cn/corp/go.php/vCB_AllNewsStock/symbol/{0}.phtml'
 link_temp2 = 'http://vip.stock.finance.sina.com.cn/corp/go.php/vCI_CorpOtherInfo/stockid/{0}/menu_num/5.phtml'
 link_taogu = 'https://www.taoguba.com.cn/quotes/{0}'
+
 
 class Stock:
     def __init__(self):
@@ -21,13 +22,14 @@ class Stock:
         self.date = ''
         self.high = ''
 
+
 def get_all_files():
     f = []
     for (dirpath, dirnames, filenames) in walk('./store/'):
         f.extend(filenames)
         break
     return f
-    
+
 
 def load_data(filename):
     f_local = open('./store/{0}'.format(filename), 'r')
@@ -46,14 +48,16 @@ def load_data(filename):
         his_stock.append(s)
     return his_stock
 
+
 def find_peak(data):
     peak_index = 0
     high_value = 0
     for index, d in enumerate(data):
         if float(d.high) > high_value:
-            high_value = float(d.high) 
+            high_value = float(d.high)
             peak_index = index
     return peak_index
+
 
 class TestStringMethods(unittest.TestCase):
 
@@ -71,26 +75,23 @@ class TestStringMethods(unittest.TestCase):
 def range_meet(data_range, high_vol):
     meet = True
     for d in data_range:
-        if float(d.vol)>float(high_vol) and float(d.change)<0:
+        if float(d.vol) > float(high_vol) and float(d.change) < 0:
             meet = False
             break
     return meet
 
+
 if __name__ == '__main__':
-    #unittest.main()
+    # unittest.main()
     files = get_all_files()
     print(len(files))
     for f in files:
         data = load_data(f)
         peak_index = find_peak(data)
-        if peak_index>5 or peak_index == 0:
+        if peak_index > 5 or peak_index == 0:
             continue
         data_range = data[:peak_index]
         high_vol = data[peak_index].vol
-        if range_meet(data_range,high_vol):
+        if range_meet(data_range, high_vol):
             arr = f.split('.')
-            print('{0}.{1}'.format(arr[0],arr[1]))
-            
-        
-        
-    
+            print('{0}.{1}'.format(arr[0], arr[1]))

@@ -90,7 +90,7 @@ if __name__ == '__main__':
     for f in files:
         data = load_data(f)
         peak_index = find_peak(data)
-        if peak_index > 10 or peak_index == 0:
+        if peak_index > 3 or peak_index == 0:
             continue
         data_range = data[:peak_index]
         high_vol = data[peak_index].vol

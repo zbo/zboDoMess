@@ -18,13 +18,13 @@ def get_single(code):
 
 
 def get_codes():
-    codes = []
+    r = []
     with open('reduced.csv', 'r') as f:
         reader = csv.reader(f)
         for row in reader:
             code = row[0].split('.')
-            codes.append('{0}.{1}'.format(code[1], code[0]))
-    return codes
+            r.append('{0}.{1}'.format(code[1], code[0]))
+    return r
 
 
 if __name__ == '__main__':

@@ -4,14 +4,6 @@ import csv
 import unittest
 from os import walk
 
-'''模式查找范围10天'''
-scanrange = 10
-image_template = '<figure class="third"><img src="http://image.sinajs.cn/newchart/daily/n/{0}.gif" width="50%">' \
-                 '<img src="http://image.sinajs.cn/newchart/min/n/{1}.gif" width="50%"></figure>'
-link_template = 'http://vip.stock.finance.sina.com.cn/corp/go.php/vCB_AllNewsStock/symbol/{0}.phtml'
-link_temp2 = 'http://vip.stock.finance.sina.com.cn/corp/go.php/vCI_CorpOtherInfo/stockid/{0}/menu_num/5.phtml'
-link_taogu = 'https://www.taoguba.com.cn/quotes/{0}'
-
 
 class Stock:
     def __init__(self):

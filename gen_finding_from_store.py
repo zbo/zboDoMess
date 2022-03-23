@@ -105,4 +105,5 @@ if __name__ == '__main__':
     # unittest.main()
     all_code = logic()
     for code in all_code:
-        print(code.split('.')[0])
+        print(code)
+        # print(code.split('.')[0])

@@ -1,9 +1,9 @@
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
 from openpyxl.styles import Border, Side, Font
-import csv,os
+import csv, os
 from openpyxl import Workbook
-import my_finding
+import gen_finding_from_store
 
 filein = '/Users/zhubo/Documents/中美对话周期.xlsx'
 fileout = '/Users/zhubo/Documents/out.xlsx'
@@ -18,7 +18,7 @@ if os.path.exists(fileout):
     os.remove(fileout)
     print('out file deleted')
 else:
-    print('no such file:%s'%fileout)
+    print('no such file:%s' % fileout)
 
 
 def get_categoty():
@@ -59,8 +59,8 @@ def get_cate(cate):
 
 
 def copy_row(target_sheet, source_sheet, index):
-    target_row = target_sheet.max_row+1
-    for c in range(1, source_sheet.max_column+1):
+    target_row = target_sheet.max_row + 1
+    for c in range(1, source_sheet.max_column + 1):
         target_cell = target_sheet.cell(row=target_row, column=c)
         # print('index={0} column={1}'.format(index,c))
         source_cell = source_sheet.cell(row=index, column=c)
@@ -123,7 +123,7 @@ def meet_high_condition(source_sheet, index):
         if color_item.index == 'FFFF0000':
             total_num = total_num + 1
         else:
-            if total_num>max_num:
+            if total_num > max_num:
                 max_num = total_num
             total_num = 0
     return max_num >= 5
@@ -138,8 +138,9 @@ def generate_top_sheet():
                 copy_row(wb_out['高度'], high_sheet, i)
     wb_out.save(fileout)
 
+
 def generate_sl_sheet():
-    all_code = my_finding.logic()
+    all_code = gen_finding_from_store.logic()
     for i in range(1, high_sheet.max_row):
         if i == 1:
             copy_title(wb_out['缩量'], high_sheet)
@@ -147,6 +148,7 @@ def generate_sl_sheet():
             if high_sheet.cell(row=i, column=1).value in all_code:
                 copy_row(wb_out['缩量'], high_sheet, i)
     wb_out.save(fileout)
+
 
 if __name__ == '__main__':
     category = get_categoty()

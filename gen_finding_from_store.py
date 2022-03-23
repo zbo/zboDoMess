@@ -103,4 +103,6 @@ def logic():
 
 if __name__ == '__main__':
     # unittest.main()
-    print(logic())
+    all_code = logic()
+    for code in all_code:
+        print(code.split('.')[0])

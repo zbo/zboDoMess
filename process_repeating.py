@@ -1,5 +1,6 @@
 import csv
 
+
 def gen_meta():
     with open('list.csv', 'r') as f:
         meta_csv_reader = csv.reader(f)
@@ -9,6 +10,7 @@ def gen_meta():
                 print(row)
                 continue
             meta_all_codes.append(row)
+
 
 if __name__ == '__main__':
     gen_meta()

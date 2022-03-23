@@ -3,7 +3,7 @@ from openpyxl.styles import PatternFill
 from openpyxl.styles import Border, Side
 import csv
 import requests
-import time,os
+import time, os
 
 
 def get_request(bat_arr):
@@ -11,13 +11,14 @@ def get_request(bat_arr):
     req_str = 'https://hq.sinajs.cn/list={0}'.format(query_string)
     return req_str
 
+
 fileout = '/Users/zhubo/Documents/in.xlsx'
 
 if os.path.exists(fileout):
     os.remove(fileout)
     print('in file deleted')
 else:
-    print('no such file:%s'%fileout)
+    print('no such file:%s' % fileout)
 
 wb = Workbook()
 ws = wb.active
@@ -47,8 +48,8 @@ with open('list.csv', 'r') as f:
     for request in request_array:
         print(request)
         time.sleep(1)
-        header = {'Referer':'https://finance.sina.com.cn'}
-        response = requests.get(request,headers=header)
+        header = {'Referer': 'https://finance.sina.com.cn'}
+        response = requests.get(request, headers=header)
         ten_batch = response.text.split(';')
         for one in ten_batch:
             if len(one) > 4:

@@ -7,7 +7,3 @@ with open("raw.txt", "r") as fo:
                 print(code + '.sz')
             if code[0] == '6':
                 print(code + '.sh')
-
-#%%
-
-#%%

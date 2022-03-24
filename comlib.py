@@ -26,7 +26,7 @@ def fill_stock(result):
     s.each_day = result['date'].iloc[::-1].values
     result['close'] = result['close'].astype(float)
     result['preclose'] = result['preclose'].astype(float)
-    result['change'] = result['close']-result['preclose']
+    result['change'] = (result['close']-result['preclose'])*100/result['preclose']
     s.each_day_change = result['change'].iloc[::-1].values
     return s
 

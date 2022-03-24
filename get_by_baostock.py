@@ -1,6 +1,6 @@
 import baostock as bs
 import pandas as pd
-import csv,os
+import csv, os
 import comlib
 from openpyxl import Workbook
 
@@ -12,15 +12,14 @@ if os.path.exists(fileout):
     os.remove(fileout)
     print('bao history file deleted')
 else:
-    print('no such file:%s'%fileout)
+    print('no such file:%s' % fileout)
+
 
 def get_single(code):
     rs = bs.query_history_k_data_plus(code,
                                       "date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,isST",
-                                      start_date='2022-03-01', end_date='2022-12-31',
+                                      start_date='2022-01-01', end_date='2022-12-31',
                                       frequency="d", adjustflag="3")
-    print('query_history_k_data_plus respond error_code:' + rs.error_code)
-    print('query_history_k_data_plus respond  error_msg:' + rs.error_msg)
     data_list = []
     while (rs.error_code == '0') & rs.next():
         data_list.append(rs.get_row_data())
@@ -30,8 +29,9 @@ def get_single(code):
 
 def get_codes():
     r = []
-    with open('reduced.csv', 'r') as f:
+    with open('list.csv', 'r') as f:
         reader = csv.reader(f)
+        index = 1
         for row in reader:
             code = row[0].split('.')
             r.append('{0}.{1}'.format(code[1], code[0]))
@@ -44,12 +44,14 @@ if __name__ == '__main__':
     print('login respond  error_msg:' + lg.error_msg)
     codes = get_codes()
     data_bag = []
+    index = 1
     for code in codes:
         result = get_single(code)
         # result.to_csv("D:\\history_A_stock_k_data.csv", index=False)
         s = comlib.fill_stock(result)
         data_bag.append(s)
-        # print(result)
+        print('process {0} for {1}'.format(index, code))
+        index = index + 1
     bs.logout()
     comlib.gen_excel(data_bag, ws)
     wb.save(fileout)

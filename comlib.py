@@ -17,6 +17,20 @@ class Stock:
         self.each_day.append(day)
 
 
+def fill_stock(result):
+    s = Stock()
+    t = result.code[0].split('.')
+    code = '{0}.{1}'.format(t[1],t[0])
+    s.code = code
+    s.name = 'BS_missing'
+    s.each_day = result['date'].iloc[::-1].values
+    result['close'] = result['close'].astype(float)
+    result['preclose'] = result['preclose'].astype(float)
+    result['change'] = result['close']-result['preclose']
+    s.each_day_change = result['change'].iloc[::-1].values
+    return s
+
+
 def gen_excel(data_bag,ws):
     data_bag = fill_in(data_bag)
     lendays = len(data_bag[0].each_day_change)

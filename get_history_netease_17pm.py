@@ -86,5 +86,5 @@ if __name__ == '__main__':
         print("processed {0}, current request grab {1} rows".format(
             index, len(s.each_day)))
 
-    comlib.gen_excel(data_bag,ws)
+    comlib.gen_excel(data_bag, ws)
     wb.save(fileout)

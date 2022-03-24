@@ -1,8 +1,18 @@
 import baostock as bs
 import pandas as pd
-import csv
+import csv,os
 import comlib
+from openpyxl import Workbook
 
+fileout = '/Users/zhubo/Documents/history_bao.xlsx'
+wb = Workbook()
+ws = wb.active
+
+if os.path.exists(fileout):
+    os.remove(fileout)
+    print('bao history file deleted')
+else:
+    print('no such file:%s'%fileout)
 
 def get_single(code):
     rs = bs.query_history_k_data_plus(code,
@@ -33,8 +43,13 @@ if __name__ == '__main__':
     print('login respond error_code:' + lg.error_code)
     print('login respond  error_msg:' + lg.error_msg)
     codes = get_codes()
+    data_bag = []
     for code in codes:
         result = get_single(code)
         # result.to_csv("D:\\history_A_stock_k_data.csv", index=False)
-        print(result)
+        s = comlib.fill_stock(result)
+        data_bag.append(s)
+        # print(result)
     bs.logout()
+    comlib.gen_excel(data_bag, ws)
+    wb.save(fileout)

@@ -1,6 +1,7 @@
 import baostock as bs
 import pandas as pd
 import csv
+import comlib
 
 
 def get_single(code):

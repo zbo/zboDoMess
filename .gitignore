@@ -11,3 +11,4 @@ list.csv
 raw.txt
 RESULT.MD
 /reduced.csv
+__pycache__/*

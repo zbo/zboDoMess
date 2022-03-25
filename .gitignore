@@ -1,6 +1,7 @@
 venv/*
 .idea/*
 store/*
+bao/*
 sina/*
 balances.xlsx
 history.xlsx

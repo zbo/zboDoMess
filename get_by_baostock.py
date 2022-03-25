@@ -46,9 +46,15 @@ if __name__ == '__main__':
     data_bag = []
     index = 1
     for code in codes:
-        result = get_single(code)
-        # result.to_csv("D:\\history_A_stock_k_data.csv", index=False)
+        filepath = './bao/{0}.csv'.format(code)
+        if os.path.exists(filepath):
+            result = df = pd.read_csv(filepath)
+        else:
+            result = get_single(code)
+            result.to_csv(filepath, index=False)
         s = comlib.fill_stock(result)
+        rs = bs.query_stock_basic(code = code)
+        s.name = rs.data[0][1]
         data_bag.append(s)
         print('process {0} for {1}'.format(index, code))
         index = index + 1

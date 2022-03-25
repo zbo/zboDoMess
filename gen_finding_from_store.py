@@ -55,11 +55,18 @@ def find_peak(data):
 
 class TestStringMethods(unittest.TestCase):
 
+    def test_bllh(self):
+        data = load_data('002037.sz.csv')
+        peak_index = find_peak(data)
+        print(peak_index)
+
+    @unittest.skip
     def test_upper(self):
         data = load_data('000524.sz.csv')
         peak_index = find_peak(data)
         self.assertEqual(peak_index, 0)
 
+    @unittest.skip
     def test_isupper(self):
         data = load_data('002246.sz.csv')
         peak_index = find_peak(data)

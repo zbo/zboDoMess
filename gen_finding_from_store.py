@@ -89,7 +89,8 @@ def logic():
     for f in files:
         data = load_data(f)
         peak_index = find_peak(data)
-        if peak_index > 4 or peak_index == 0:
+
+        if remove_meet(data, peak_index):
             continue
         data_range = data[:peak_index]
         high_vol = data[peak_index].vol
@@ -98,6 +99,12 @@ def logic():
             code_list.append('{0}.{1}'.format(arr[0], arr[1]))
             # print(data[0].name)
     return code_list
+
+
+def remove_meet(data, peak_index):
+    too_long = peak_index > 4 or peak_index == 0
+    peak_dark = float(data[peak_index].change) < 0
+    return too_long or peak_dark
 
 
 if __name__ == '__main__':

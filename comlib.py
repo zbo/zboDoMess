@@ -27,7 +27,10 @@ def fill_stock(result):
     result['close'] = result['close'].astype(float)
     result['preclose'] = result['preclose'].astype(float)
     result['change'] = (result['close']-result['preclose'])*100/result['preclose']
+    result['change'] = result['change'].round(2)
+    result['change'] = result['change'].astype(str).apply(lambda x:x.rstrip('0'))
     s.each_day_change = result['change'].iloc[::-1].values
+    s.each_day_change = s.each_day_change.tolist()
     return s
 
 
@@ -64,7 +67,7 @@ def gen_excel(data_bag,ws):
                 c.fill = PatternFill("solid", fgColor="FF6600")
             elif 1.5 < va <= 5:
                 c.fill = PatternFill("solid", fgColor="ec7c24")
-            elif 0 <= va < 1.5:
+            elif 0 <= va <= 1.5:
                 c.fill = PatternFill("solid", fgColor="FFCC00")
             elif -1.5 <= va < 0:
                 c.fill = PatternFill("solid", fgColor="99CC00")

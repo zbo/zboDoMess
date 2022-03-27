@@ -54,7 +54,10 @@ if __name__ == '__main__':
             result.to_csv(filepath, index=False)
         s = comlib.fill_stock(result)
         rs = bs.query_stock_basic(code = code)
-        s.name = rs.data[0][1]
+        if len(rs.data) == 0:
+            s.name = 'query_failed'
+        else:
+            s.name = rs.data[0][1]
         data_bag.append(s)
         print('process {0} for {1}'.format(index, code))
         index = index + 1

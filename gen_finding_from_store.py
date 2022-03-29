@@ -1,4 +1,4 @@
-#coding='utf-8'
+# coding='utf-8'
 
 import csv
 import unittest
@@ -83,7 +83,7 @@ def range_meet(data_range, high_vol):
 
 
 def logic():
-    code_list=[]
+    code_list = []
     files = get_all_files()
     print(len(files))
     for f in files:
@@ -102,7 +102,7 @@ def logic():
 
 
 def remove_meet(data, peak_index):
-    too_long = peak_index > 4 or peak_index == 0
+    too_long = peak_index > 10 or peak_index == 0
     peak_dark = float(data[peak_index].change) < 0
     return too_long or peak_dark
 

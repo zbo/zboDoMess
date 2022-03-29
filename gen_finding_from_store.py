@@ -85,7 +85,7 @@ def range_meet(data_range, high_vol):
 def logic():
     code_list = []
     files = get_all_files()
-    print(len(files))
+    print('total {0} files found in store'.format(len(files)))
     for f in files:
         data = load_data(f)
         peak_index = find_peak(data)

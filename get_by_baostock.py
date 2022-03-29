@@ -53,7 +53,7 @@ if __name__ == '__main__':
             result = get_single(code)
             result.to_csv(filepath, index=False)
         s = comlib.fill_stock(result)
-        rs = bs.query_stock_basic(code = code)
+        rs = bs.query_stock_basic(code=code)
         if len(rs.data) == 0:
             s.name = 'query_failed'
         else:

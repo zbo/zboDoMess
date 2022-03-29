@@ -23,7 +23,7 @@ if os.path.exists(fileout):
     os.remove(fileout)
     print('history file deleted')
 else:
-    print('no such file:%s'%fileout)
+    print('no such file:%s' % fileout)
 
 
 def gen_meta():

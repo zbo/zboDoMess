@@ -102,7 +102,7 @@ def logic():
 
 
 def remove_meet(data, peak_index):
-    too_long = peak_index > 10 or peak_index == 0
+    too_long = peak_index > 4 or peak_index == 0
     peak_dark = float(data[peak_index].change) < 0
     return too_long or peak_dark
 

@@ -150,6 +150,12 @@ def generate_sl_sheet():
     wb_out.save(fileout)
 
 
+def freeze_pan_for_all_sheet():
+    for name in wb_out.sheetnames:
+        wb_out[name].freeze_panes = 'D2'
+    wb_out.save(fileout)
+
+
 if __name__ == '__main__':
     category = get_categoty()
     # print(category)
@@ -159,3 +165,4 @@ if __name__ == '__main__':
     generate_cate_sheet()
     generate_top_sheet()
     generate_sl_sheet()
+    freeze_pan_for_all_sheet()

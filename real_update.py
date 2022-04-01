@@ -56,7 +56,7 @@ def update_out_wb(all_cate, date_num):
 def find_date_num_from_out(date_num):
     max_col = wb_out['其他'].max_column
     for i in range(max_col, 1, -1):
-        if str(wb_out['其他'].cell(row=1, column=i).value) == date_num:
+        if str(wb_out['其他'].cell(row=1, column=i).value) == str(date_num):
             col_char = wb_out['其他'].cell(row=1, column=i).column_letter
             col_num = i
             break
@@ -69,7 +69,7 @@ if __name__ == '__main__':
     date_num = get_date_num()
     print(all_cate)
     print(date_num)
-    col_char, col_num = find_date_num_from_out(date_num)
+    col_char, col_num = find_date_num_from_out(int(date_num))
     update_out_wb(all_cate, col_num)
     wb_in.close()
     wb_out.close()

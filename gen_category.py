@@ -4,6 +4,7 @@ from openpyxl.styles import Border, Side, Font
 import csv, os
 from openpyxl import Workbook
 import gen_finding_from_store
+import gen_finding_from_bao
 
 filein = '/Users/zhubo/Documents/中美对话周期.xlsx'
 fileout = '/Users/zhubo/Documents/out.xlsx'
@@ -140,7 +141,9 @@ def generate_top_sheet():
 
 
 def generate_sl_sheet():
-    all_code = gen_finding_from_store.logic()
+    all_code_store = gen_finding_from_store.logic()
+    all_code_bao = gen_finding_from_bao.logic()
+    all_code = set(all_code_bao+all_code_store)
     for i in range(1, high_sheet.max_row):
         if i == 1:
             copy_title(wb_out['缩量'], high_sheet)

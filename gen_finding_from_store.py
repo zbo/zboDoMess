@@ -3,6 +3,7 @@
 import csv
 import unittest
 from os import walk
+import comlib
 
 
 class Stock:
@@ -102,7 +103,7 @@ def logic():
 
 
 def remove_meet(data, peak_index):
-    too_long = peak_index > 4 or peak_index == 0
+    too_long = peak_index > comlib.sl_scan_range or peak_index == 0
     peak_dark = float(data[peak_index].change) < 0
     return too_long or peak_dark
 

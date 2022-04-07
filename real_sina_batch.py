@@ -47,7 +47,7 @@ with open('list.csv', 'r') as f:
     all_result = []
     for request in request_array:
         print(request)
-        time.sleep(1)
+        time.sleep(2)
         header = {'Referer': 'https://finance.sina.com.cn'}
         response = requests.get(request, headers=header)
         ten_batch = response.text.split(';')

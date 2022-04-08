@@ -12,7 +12,9 @@ wb_in = load_workbook(filename=filein)
 
 def get_date_num():
     now = datetime.datetime.now()
-    return now.strftime('%d')
+    day = now.strftime('%d')
+    day = int(day)
+    return str(day)
 
 
 def get_cate_from_conf():

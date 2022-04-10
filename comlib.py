@@ -2,7 +2,7 @@ from openpyxl.styles import Border, Side
 from openpyxl.styles import PatternFill
 from openpyxl import Workbook
 
-sl_scan_range = 4
+sl_scan_range = 10
 
 
 class Stock:

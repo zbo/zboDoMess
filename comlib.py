@@ -1,8 +1,19 @@
 from openpyxl.styles import Border, Side
 from openpyxl.styles import PatternFill
 from openpyxl import Workbook
+import csv
 
 sl_scan_range = 10
+
+def get_codes():
+    r = []
+    with open('list.csv', 'r') as f:
+        reader = csv.reader(f)
+        index = 1
+        for row in reader:
+            code = row[0].split('.')
+            r.append('{0}.{1}'.format(code[1], code[0]))
+    return r
 
 
 class Stock:

@@ -27,22 +27,11 @@ def get_single(code):
     return result
 
 
-def get_codes():
-    r = []
-    with open('list.csv', 'r') as f:
-        reader = csv.reader(f)
-        index = 1
-        for row in reader:
-            code = row[0].split('.')
-            r.append('{0}.{1}'.format(code[1], code[0]))
-    return r
-
-
 if __name__ == '__main__':
     lg = bs.login()
     print('login respond error_code:' + lg.error_code)
     print('login respond  error_msg:' + lg.error_msg)
-    codes = get_codes()
+    codes = comlib.get_codes()
     data_bag = []
     index = 1
     for code in codes:

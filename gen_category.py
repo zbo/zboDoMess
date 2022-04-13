@@ -70,7 +70,7 @@ def copy_row(target_sheet, source_sheet, index):
         thin = Side(border_style="thin", color="000000")
         target_cell.border = Border(top=thin, left=thin, right=thin, bottom=thin)
         target_cell.font = Font(name='华文楷体')
-        if target_cell.column_letter not in ['A', 'B', 'C', 'D']:
+        if target_cell.column_letter not in ['A', 'B', 'C']:
             target_sheet.column_dimensions[target_cell.column_letter].width = 3
 
 

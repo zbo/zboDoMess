@@ -6,7 +6,7 @@ from openpyxl import Workbook
 import gen_finding_from_store
 import gen_finding_from_bao
 
-filein = '/Users/zhubo/Documents/中美对话周期.xlsx'
+filein = '/Users/zhubo/Documents/大市场周期.xlsx'
 fileout = '/Users/zhubo/Documents/out.xlsx'
 wb_out = Workbook()
 wb = load_workbook(filename=filein)
@@ -127,7 +127,7 @@ def meet_high_condition(source_sheet, index):
             if total_num > max_num:
                 max_num = total_num
             total_num = 0
-    return max_num >= 5
+    return max_num >= 7
 
 
 def generate_top_sheet():

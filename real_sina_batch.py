@@ -12,7 +12,7 @@ def get_request(bat_arr):
     return req_str
 
 
-fileout = '/Users/zhubo/Documents/in.xlsx'
+fileout = './content/in.xlsx'
 
 if os.path.exists(fileout):
     os.remove(fileout)

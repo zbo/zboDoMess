@@ -4,7 +4,7 @@ import csv, os
 import comlib
 from openpyxl import Workbook
 
-fileout = '/Users/zhubo/Documents/history_bao.xlsx'
+fileout = './content/history_bao.xlsx'
 wb = Workbook()
 ws = wb.active
 

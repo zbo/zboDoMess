@@ -4,9 +4,9 @@ from openpyxl.styles import Border, Side, Font
 import csv, os, datetime
 from openpyxl import Workbook
 
-fileout = '/Users/zhubo/Documents/out.xlsx'
+fileout = './content/out.xlsx'
 wb_out = load_workbook(filename=fileout)
-filein = '/Users/zhubo/Documents/in.xlsx'
+filein = './content/in.xlsx'
 wb_in = load_workbook(filename=filein)
 
 

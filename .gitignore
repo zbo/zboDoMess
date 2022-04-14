@@ -3,6 +3,7 @@ venv/*
 store/*
 bao/*
 sina/*
+content/*
 balances.xlsx
 history.xlsx
 .DS_Store

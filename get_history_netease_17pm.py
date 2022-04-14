@@ -12,7 +12,7 @@ import comlib
 import requests
 from openpyxl.styles.builtins import styles
 
-fileout = '/Users/zhubo/Documents/history.xlsx'
+fileout = './content/history.xlsx'
 url_format = 'http://quotes.money.163.com/service/chddata.html?code={0}&start=20220101&end=20221231'
 # url_format = 'http://quotes.money.163.com/service/chddata.html?code={0}&start=20201115&end=20210126&fields=PCHG'
 

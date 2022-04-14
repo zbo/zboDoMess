@@ -6,8 +6,8 @@ from openpyxl import Workbook
 import gen_finding_from_store
 import gen_finding_from_bao
 
-filein = '/Users/zhubo/Documents/大市场周期.xlsx'
-fileout = '/Users/zhubo/Documents/out.xlsx'
+filein = './content/大市场周期.xlsx'
+fileout = './content/out.xlsx'
 wb_out = Workbook()
 wb = load_workbook(filename=filein)
 high_sheet = wb['虎年高度']

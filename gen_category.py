@@ -1,3 +1,4 @@
+#coding=utf-8
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
 from openpyxl.styles import Border, Side, Font

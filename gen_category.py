@@ -103,6 +103,8 @@ def generate_cate_sheet():
 
 def gen_sheet():
     for item in existing:
+        if '原始' not in wb_out.sheetnames:
+            wb_out.create_sheet('原始')
         if '其他' not in wb_out.sheetnames:
             wb_out.create_sheet('其他')
         if '高度' not in wb_out.sheetnames:
@@ -154,6 +156,15 @@ def generate_sl_sheet():
     wb_out.save(fileout)
 
 
+def generate_orign_sheet():
+    for i in range(1, high_sheet.max_row):
+        if i == 1:
+            copy_title(wb_out['原始'], high_sheet)
+        else:
+            copy_row(wb_out['原始'], high_sheet, i)
+    wb_out.save(fileout)
+
+
 def freeze_pan_for_all_sheet():
     for name in wb_out.sheetnames:
         wb_out[name].freeze_panes = 'D2'
@@ -167,6 +178,7 @@ if __name__ == '__main__':
     # print(others)
     gen_sheet()
     generate_cate_sheet()
+    generate_orign_sheet()
     generate_top_sheet()
     generate_sl_sheet()
     freeze_pan_for_all_sheet()

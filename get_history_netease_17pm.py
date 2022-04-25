@@ -1,6 +1,7 @@
 # coding=utf-8
 from openpyxl.styles import Border, Side
 from openpyxl.styles import PatternFill
+from openpyxl import load_workbook
 from openpyxl import Workbook
 from io import StringIO
 import os
@@ -25,25 +26,25 @@ if os.path.exists(fileout):
 else:
     print('no such file:%s' % fileout)
 
-
-def gen_meta():
-    with open('list.csv', 'r') as f:
-        meta_csv_reader = csv.reader(f)
-        meta_all_codes = []
-        meta_all_urls = []
-        for row in meta_csv_reader:
-            if row in meta_all_codes:
-                print(row)
-                continue
-            meta_all_codes.append(row)
-            code = row[0].split('.')[0]
-            mkt = '0'
-            if row[0].split('.')[1].lower() == 'sz':
-                mkt = '1'
-            n_code = mkt + code
-            url_formatted = url_format.format(n_code)
-            meta_all_urls.append(url_formatted)
-        return meta_all_urls, meta_all_codes
+def gen_meta_from_xl():
+    meta_all_urls = []
+    meta_all_codes = []
+    wb = load_workbook(filename=comlib.filein)
+    high_sheet = wb[comlib.highsheet]
+    index = 2
+    while high_sheet['A{0}'.format(index)].value is not None:
+        code = high_sheet['A{0}'.format(index)].value
+        index = index + 1
+        meta_all_codes.append(code)
+        code_short = code.split('.')[0]
+        mkt = '0'
+        if code.split('.')[1].lower() == 'sz':
+            mkt = '1'
+        n_code = mkt + code_short
+        url_formatted = url_format.format(n_code)
+        meta_all_urls.append(url_formatted)
+    return meta_all_urls, meta_all_codes
+        
 
 
 def file_exist(file_name):
@@ -53,12 +54,12 @@ def file_exist(file_name):
 
 
 if __name__ == '__main__':
-    all_urls, all_codes = gen_meta()
+    all_urls, all_codes = gen_meta_from_xl()
     index = 0
     data_bag = []
     for u in all_urls:
         s = comlib.Stock()
-        filename = all_codes[index][0] + '.csv'
+        filename = all_codes[index] + '.csv'
         if not file_exist(filename):
             print(u)
             response = requests.get(u)

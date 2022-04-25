@@ -4,6 +4,8 @@ from openpyxl import Workbook
 import csv
 
 sl_scan_range = 10
+filein = './content/大市场周期.xlsx'
+highsheet = '虎年高度'
 
 def get_codes():
     r = []

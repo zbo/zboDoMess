@@ -1,4 +1,5 @@
 import csv
+import comlib
 
 new_added = []
 meta_all_codes = []
@@ -13,10 +14,8 @@ with open("raw.txt", "r") as fo:
                 new_added.append(code + '.sz')
             if code[0] == '6':
                 new_added.append(code + '.sh')
-with open('list.csv', 'r') as f:
-    meta_csv_reader = csv.reader(f)
-    for row in meta_csv_reader:
-        meta_all_codes.append(row[0])
+
+meta_all_codes = comlib.get_codes_from_xl()
 for item in new_added:
     if item not in meta_all_codes:
         print(item)

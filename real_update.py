@@ -26,6 +26,7 @@ def get_cate_from_conf():
     all_cate.append('其他')
     all_cate.append('高度')
     all_cate.append('缩量')
+    all_cate.append('原始')
     return all_cate
 
 

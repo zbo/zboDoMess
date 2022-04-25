@@ -1,20 +1,24 @@
 from openpyxl.styles import Border, Side
 from openpyxl.styles import PatternFill
 from openpyxl import Workbook
+from openpyxl import load_workbook
 import csv
 
 sl_scan_range = 10
 filein = './content/大市场周期.xlsx'
 highsheet = '虎年高度'
 
-def get_codes():
+
+def get_codes_from_xl():
     r = []
-    with open('list.csv', 'r') as f:
-        reader = csv.reader(f)
-        index = 1
-        for row in reader:
-            code = row[0].split('.')
-            r.append('{0}.{1}'.format(code[1], code[0]))
+    wb = load_workbook(filename=filein)
+    high_sheet = wb[highsheet]
+    index = 2
+    while high_sheet['A{0}'.format(index)].value is not None:
+        code = high_sheet['A{0}'.format(index)].value
+        index = index + 1
+        coden = code.split('.')
+        r.append('{0}.{1}'.format(coden[1], coden[0]))
     return r
 
 

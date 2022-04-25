@@ -31,7 +31,7 @@ if __name__ == '__main__':
     lg = bs.login()
     print('login respond error_code:' + lg.error_code)
     print('login respond  error_msg:' + lg.error_msg)
-    codes = comlib.get_codes()
+    codes = comlib.get_codes_from_xl()
     data_bag = []
     index = 1
     for code in codes:

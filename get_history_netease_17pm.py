@@ -81,7 +81,7 @@ if __name__ == '__main__':
             s.add_Item(row[9])
             s.add_Day(row[0])
             s.name = row[2]
-            s.code = all_codes[index][0]
+            s.code = all_codes[index]
         data_bag.append(s)
         f_local.close()
         index = index + 1

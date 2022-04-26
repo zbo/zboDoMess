@@ -21,6 +21,16 @@ def get_codes_from_xl():
         r.append('{0}.{1}'.format(coden[1], coden[0]))
     return r
 
+def get_orign_codes_from_xl():
+    r = []
+    wb = load_workbook(filename=filein)
+    high_sheet = wb[highsheet]
+    index = 2
+    while high_sheet['A{0}'.format(index)].value is not None:
+        code = high_sheet['A{0}'.format(index)].value
+        index = index + 1
+        r.append(code)
+    return r
 
 class Stock:
     def __init__(self):

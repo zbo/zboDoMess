@@ -15,7 +15,7 @@ with open("raw.txt", "r") as fo:
             if code[0] == '6':
                 new_added.append(code + '.sh')
 
-meta_all_codes = comlib.get_codes_from_xl()
+meta_all_codes = comlib.get_orign_codes_from_xl()
 for item in new_added:
     if item not in meta_all_codes:
         print(item)

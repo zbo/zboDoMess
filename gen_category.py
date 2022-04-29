@@ -15,6 +15,7 @@ high_sheet = wb['虎年高度']
 category = []
 existing = []
 others = []
+color = ['00FFFFFF','00FFCC99','00CCFFCC','00FFFF99','00CCCCFF','00FF8080','00FF9900','00339966','00666699','00FF99CC']
 
 if os.path.exists(fileout):
     os.remove(fileout)
@@ -156,12 +157,28 @@ def generate_sl_sheet():
     wb_out.save(fileout)
 
 
+def get_color_by_cate(sheet_instance, index):
+    cate = sheet_instance.cell(row=index, column=3).value
+    color_index = 0
+    for i in range(len(existing)):
+        if cate in existing[i]:
+            color_index = i + 1
+            break
+    return color[color_index]
+
+def fill_color(sheet_instance, index, color_str):
+    sheet_instance.cell(row = index, column = 1).fill = PatternFill("solid", fgColor=color_str)
+    sheet_instance.cell(row = index, column = 2).fill = PatternFill("solid", fgColor=color_str)
+    sheet_instance.cell(row = index, column = 3).fill = PatternFill("solid", fgColor=color_str)
+
 def generate_orign_sheet():
     for i in range(1, high_sheet.max_row):
         if i == 1:
             copy_title(wb_out['原始'], high_sheet)
         else:
             copy_row(wb_out['原始'], high_sheet, i)
+            row_color = get_color_by_cate(high_sheet, i)
+            fill_color(wb_out['原始'], i, row_color)
     wb_out.save(fileout)
 
 

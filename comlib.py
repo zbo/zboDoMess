@@ -1,3 +1,4 @@
+from unicodedata import name
 from openpyxl.styles import Border, Side
 from openpyxl.styles import PatternFill
 from openpyxl import Workbook
@@ -8,6 +9,17 @@ sl_scan_range = 10
 filein = './content/大市场周期.xlsx'
 highsheet = '虎年高度'
 
+def get_cate_dict_from_xl():
+    r = {}
+    wb = load_workbook(filename=filein)
+    high_sheet = wb[highsheet]
+    index = 2
+    while high_sheet['A{0}'.format(index)].value is not None:
+        code = high_sheet['A{0}'.format(index)].value
+        cate = high_sheet['C{0}'.format(index)].value
+        index = index + 1
+        r[code] = cate
+    return r
 
 def get_codes_from_xl():
     r = []

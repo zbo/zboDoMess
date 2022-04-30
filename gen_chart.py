@@ -1,4 +1,5 @@
 # coding=utf-8
+import comlib
 import csv
 
 image_template = '<figure class="third"><img src="http://image.sinajs.cn/newchart/daily/n/{0}.gif" width="50%">' \
@@ -6,6 +7,8 @@ image_template = '<figure class="third"><img src="http://image.sinajs.cn/newchar
 link_template = 'http://vip.stock.finance.sina.com.cn/corp/go.php/vCB_AllNewsStock/symbol/{0}.phtml'
 link_temp2 = 'http://vip.stock.finance.sina.com.cn/corp/go.php/vCI_CorpOtherInfo/stockid/{0}/menu_num/5.phtml'
 link_taogu = 'https://www.taoguba.com.cn/quotes/{0}'
+
+cate_dict = comlib.get_cate_dict_from_xl()
 
 with open('reduced.csv', 'r') as f:
     reader = csv.reader(f)
@@ -21,5 +24,9 @@ with open('reduced.csv', 'r') as f:
         print('[消息面]({0})'.format(link2))
         link3 = link_taogu.format(code)
         print('[淘股吧]({0})'.format(link3))
+        cate = 'Unknow'
+        if row[0] in cate_dict:
+            cate = cate_dict[row[0]]
+        print('[{0}]()'.format(cate))
         print(image_template.format(code, code))
         print('\n')

@@ -78,6 +78,8 @@ class TestStringMethods(unittest.TestCase):
 def range_meet(data_range, high_vol):
     meet = True
     for d in data_range:
+        if d.vol == '':
+            continue
         if float(d.vol) > float(high_vol) and float(d.change) < 0:
             meet = False
             break

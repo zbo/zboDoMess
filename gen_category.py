@@ -131,11 +131,11 @@ def meet_high_condition(source_sheet, index):
             if total_num > max_num:
                 max_num = total_num
             total_num = 0
-    return max_num >= 5
+    return max_num >= 6
 
 
 def generate_top_sheet():
-    for i in range(1, high_sheet.max_row):
+    for i in range(1, high_sheet.max_row+1):
         if i == 1:
             copy_title(wb_out['高度'], high_sheet)
         else:
@@ -148,7 +148,7 @@ def generate_sl_sheet():
     all_code_store = gen_finding_from_store.logic()
     all_code_bao = gen_finding_from_bao.logic()
     all_code = set(all_code_bao+all_code_store)
-    for i in range(1, high_sheet.max_row):
+    for i in range(1, high_sheet.max_row+1):
         if i == 1:
             copy_title(wb_out['缩量'], high_sheet)
         else:
@@ -172,7 +172,7 @@ def fill_color(sheet_instance, index, color_str):
     sheet_instance.cell(row = index, column = 3).fill = PatternFill("solid", fgColor=color_str)
 
 def generate_orign_sheet():
-    for i in range(1, high_sheet.max_row):
+    for i in range(1, high_sheet.max_row+1):
         if i == 1:
             copy_title(wb_out['原始'], high_sheet)
         else:

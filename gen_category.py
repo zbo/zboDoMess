@@ -173,6 +173,8 @@ def fill_color(sheet_instance, index, color_str):
 
 def generate_orign_sheet():
     for i in range(1, high_sheet.max_row+1):
+        if high_sheet.cell(row=i,column=1).value is None:
+            continue
         if i == 1:
             copy_title(wb_out['原始'], high_sheet)
         else:

@@ -5,7 +5,7 @@ from openpyxl import Workbook
 from openpyxl import load_workbook
 import csv
 
-sl_scan_range = 10
+sl_scan_range = 6
 filein = './content/大市场周期.xlsx'
 highsheet = '虎年高度'
 

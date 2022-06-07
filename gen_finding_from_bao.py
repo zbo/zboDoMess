@@ -109,10 +109,18 @@ def logic():
     return reverse_dot
 
 
+def check_no_zt(data, ran):
+    for i in range(ran):
+        if data[i].change > 0.9:
+            return False
+    return True
+
+
 def remove_meet(data, peak_index):
     too_long = peak_index > comlib.sl_scan_range or peak_index == 0
     peak_dark = float(data[peak_index].change) < 0
-    return too_long or peak_dark
+    no_zt_ten_days = check_no_zt(data,10)
+    return too_long or peak_dark or no_zt_ten_days
 
 
 if __name__ == '__main__':

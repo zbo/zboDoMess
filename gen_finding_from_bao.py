@@ -119,8 +119,9 @@ def check_no_zt(data, ran):
 def remove_meet(data, peak_index):
     too_long = peak_index > comlib.sl_scan_range or peak_index == 0
     peak_dark = float(data[peak_index].change) < 0
+    nh = peak_index == 0
     no_zt_ten_days = check_no_zt(data,10)
-    return too_long or peak_dark or no_zt_ten_days
+    return too_long or peak_dark or no_zt_ten_days or nh
 
 
 if __name__ == '__main__':

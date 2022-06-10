@@ -15,7 +15,9 @@ high_sheet = wb['虎年高度']
 category = []
 existing = []
 others = []
-color = ['00FFFFFF','00FFCC99','00CCFFCC','00FFFF99','00CCCCFF','00FF8080','00FF9900','00339966','00666699','00FF99CC']
+color = ['00FFFFFF','00FFCC99','00CCFFCC','00FFFF99','00CCCCFF',
+         '00FF8080','00FF9900','00339966','00666699','00FF99CC',
+         '00CC99FF','00993366','00FFFFCC','00CCFFFF','00660066','00FF8080']
 
 if os.path.exists(fileout):
     os.remove(fileout)

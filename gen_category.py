@@ -108,6 +108,10 @@ def gen_sheet():
     for item in existing:
         if '原始' not in wb_out.sheetnames:
             wb_out.create_sheet('原始')
+        if '胜出' not in wb_out.sheetnames:
+            wb_out.create_sheet('胜出')
+        if '掉队' not in wb_out.sheetnames:
+            wb_out.create_sheet('掉队')
         if '其他' not in wb_out.sheetnames:
             wb_out.create_sheet('其他')
         if '高度' not in wb_out.sheetnames:
@@ -185,6 +189,28 @@ def generate_orign_sheet():
             fill_color(wb_out['原始'], i, row_color)
     wb_out.save(fileout)
 
+def generate_split_sheet():
+    out_code = []
+    with open('out.csv', 'r') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            out_code.append(row[0])
+    for i in range(1, high_sheet.max_row+1):
+        if high_sheet.cell(row=i,column=1).value is None:
+            continue
+        if i == 1:
+            copy_title(wb_out['胜出'], high_sheet)
+            copy_title(wb_out['掉队'], high_sheet)
+        else:
+            code_with_dot = high_sheet.cell(row=i,column=1).value
+            code_arr = code_with_dot.split('.')
+            code_reformat = code_arr[1]+code_arr[0]
+            if code_reformat in out_code:
+                copy_row(wb_out['掉队'], high_sheet, i)
+            else:
+                copy_row(wb_out['胜出'], high_sheet, i)
+    wb_out.save(fileout)
+
 
 def freeze_pan_for_all_sheet():
     for name in wb_out.sheetnames:
@@ -202,4 +228,5 @@ if __name__ == '__main__':
     generate_orign_sheet()
     generate_top_sheet()
     generate_sl_sheet()
+    generate_split_sheet()
     freeze_pan_for_all_sheet()

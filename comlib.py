@@ -8,6 +8,7 @@ import csv
 sl_scan_range = 6
 filein = './content/大市场周期.xlsx'
 highsheet = '虎年高度'
+sdsheet = '赛道'
 
 def get_cate_dict_from_xl():
     r = {}
@@ -21,10 +22,16 @@ def get_cate_dict_from_xl():
         r[code] = cate
     return r
 
+def get_sd_codes_from_xl():
+    return get_codes(sdsheet)
+
 def get_codes_from_xl():
+    return get_codes(highsheet)
+
+def get_codes(sheetname):
     r = []
     wb = load_workbook(filename=filein)
-    high_sheet = wb[highsheet]
+    high_sheet = wb[sheetname]
     index = 2
     while high_sheet['A{0}'.format(index)].value is not None:
         code = high_sheet['A{0}'.format(index)].value

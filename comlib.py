@@ -40,7 +40,7 @@ def get_codes(sheetname):
     return r
 
 def get_codes_from_xl():
-    sheetname = high_sheet
+    sheetname = highsheet
     r = []
     wb = load_workbook(filename=filein)
     high_sheet = wb[sheetname]

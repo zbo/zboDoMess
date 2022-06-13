@@ -51,8 +51,10 @@ for request in request_array:
     response = requests.get(request, headers=header)
     ten_batch = response.text.split(';')
     for one in ten_batch:
-        if len(one) > 200:
+        if len(one) > 100:
             all_result.append(one.split('=')[1])
+        else:
+            skip = 'skip:{0}'.format(one)
 
 index = 0
 for one in all_result:

@@ -24,7 +24,9 @@ else:
 wb = Workbook()
 ws = wb.active
 
-all_codes = comlib.get_orign_codes_from_xl()
+all_org_codes = comlib.get_orign_codes_from_xl()
+all_sd_codes = comlib.get_sd_codes_from_xl()
+all_codes = all_org_codes + all_sd_codes
 batch_array = []
 request_array = []
 orign_code = []
@@ -49,7 +51,7 @@ for request in request_array:
     response = requests.get(request, headers=header)
     ten_batch = response.text.split(';')
     for one in ten_batch:
-        if len(one) > 4:
+        if len(one) > 200:
             all_result.append(one.split('=')[1])
 
 index = 0

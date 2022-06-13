@@ -1,4 +1,5 @@
 #coding=utf-8
+from cv2 import triangulatePoints
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
 from openpyxl.styles import Border, Side, Font
@@ -12,6 +13,7 @@ fileout = './content/out.xlsx'
 wb_out = Workbook()
 wb = load_workbook(filename=filein)
 high_sheet = wb['虎年高度']
+track_sheet = wb['赛道']
 category = []
 existing = []
 others = []
@@ -108,6 +110,8 @@ def gen_sheet():
     for item in existing:
         if '原始' not in wb_out.sheetnames:
             wb_out.create_sheet('原始')
+        if '赛道' not in wb_out.sheetnames:
+            wb_out.create_sheet('赛道')
         if '胜出' not in wb_out.sheetnames:
             wb_out.create_sheet('胜出')
         if '掉队' not in wb_out.sheetnames:
@@ -211,6 +215,18 @@ def generate_split_sheet():
                 copy_row(wb_out['胜出'], high_sheet, i)
     wb_out.save(fileout)
 
+def generate_tracking_sheet():
+    target_sheet = wb_out['赛道']
+    for i in range(1, track_sheet.max_row+1):
+        if track_sheet.cell(row=i,column=1).value is None:
+            continue
+        if i == 1:
+            copy_title(target_sheet, track_sheet)
+        else:
+            copy_row(target_sheet, track_sheet, i)
+            row_color = get_color_by_cate(track_sheet, i)
+            fill_color(target_sheet, i, row_color)
+    wb_out.save(fileout)
 
 def freeze_pan_for_all_sheet():
     for name in wb_out.sheetnames:
@@ -229,4 +245,5 @@ if __name__ == '__main__':
     generate_top_sheet()
     generate_sl_sheet()
     generate_split_sheet()
+    generate_tracking_sheet()
     freeze_pan_for_all_sheet()

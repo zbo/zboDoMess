@@ -29,6 +29,7 @@ def get_cate_from_conf():
     all_cate.append('原始')
     all_cate.append('胜出')
     all_cate.append('掉队')
+    all_cate.append('赛道')
     return all_cate
 
 

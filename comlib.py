@@ -25,7 +25,7 @@ def get_cate_dict_from_xl():
 def get_sd_codes_from_xl():
     return get_codes(sdsheet)
 
-def get_codes_from_xl():
+def get_orign_codes_from_xl():
     return get_codes(highsheet)
 
 def get_codes(sheetname):
@@ -36,20 +36,21 @@ def get_codes(sheetname):
     while high_sheet['A{0}'.format(index)].value is not None:
         code = high_sheet['A{0}'.format(index)].value
         index = index + 1
-        coden = code.split('.')
-        r.append('{0}.{1}'.format(coden[1], coden[0]))
+        r.append(code)
     return r
 
-def get_orign_codes_from_xl():
+def get_codes_from_xl():
+    sheetname = high_sheet
     r = []
     wb = load_workbook(filename=filein)
-    high_sheet = wb[highsheet]
+    high_sheet = wb[sheetname]
     index = 2
     while high_sheet['A{0}'.format(index)].value is not None:
         code = high_sheet['A{0}'.format(index)].value
         index = index + 1
-        r.append(code)
-    return r
+        coden = code.split('.')
+        r.append('{0}.{1}'.format(coden[1], coden[0]))
+    return r  
 
 class Stock:
     def __init__(self):

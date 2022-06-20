@@ -161,8 +161,12 @@ def generate_sl_sheet():
     for i in range(1, high_sheet.max_row+1):
         if i == 1:
             copy_title(wb_out['缩量'], high_sheet)
+        elif high_sheet.cell(row=i, column=1).value is None:
+            continue
         else:
-            if high_sheet.cell(row=i, column=1).value in all_code:
+            compare_code = high_sheet.cell(row=i, column=1).value.split('.')
+            reverse_code = compare_code[1] + '.' + compare_code[0]
+            if reverse_code in all_code:
                 copy_row(wb_out['缩量'], high_sheet, i)
     wb_out.save(fileout)
 

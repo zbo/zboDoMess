@@ -154,6 +154,9 @@ def generate_top_sheet():
     wb_out.save(fileout)
 
 
+def generate_fx_sheet():
+    fx_code_bao = gen_finding_from_bao.logic_fx()
+
 def generate_sl_sheet():
     all_code_store = gen_finding_from_store.logic()
     all_code_bao = gen_finding_from_bao.logic()
@@ -248,6 +251,7 @@ if __name__ == '__main__':
     generate_orign_sheet()
     generate_top_sheet()
     generate_sl_sheet()
+    generate_fx_sheet()
     generate_split_sheet()
     generate_tracking_sheet()
     freeze_pan_for_all_sheet()

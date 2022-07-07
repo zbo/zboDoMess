@@ -41,6 +41,7 @@ def load_data(filename):
         s.change = float(row[5])-float(row[6])
         s.vol = row[7]
         s.high = row[3]
+        s.low = row[4]
         his_stock.append(s)
     return his_stock
 
@@ -85,11 +86,25 @@ def range_meet(data_range, high_vol):
             break
     return meet
 
+def logic_fx():
+    code_list = []
+    files = get_all_files()
+    #print('search fx total {0} files found in bao'.format(len(files)))
+    for f in files:
+        data = load_data(f)
+        data.reverse()
+        hit_bottom = data[1].low <= data[2].low and data[1].high <= data[2].high
+        protect_bottom = data[0].low >= data[1].low
+        if hit_bottom and protect_bottom:
+            arr = f.split('.')
+            code_list.append('{0}.{1}'.format(arr[0], arr[1]))
+    #print('total {0} item meet fx condition'.format(len(code_list)))
+    return code_list
 
 def logic():
     code_list = []
     files = get_all_files()
-    print('total {0} files found in bao'.format(len(files)))
+    print('search sl total {0} files found in bao'.format(len(files)))
     for f in files:
         data = load_data(f)
         data.reverse()
@@ -126,7 +141,7 @@ def remove_meet(data, peak_index):
 
 if __name__ == '__main__':
     # unittest.main()
-    all_code = logic()
+    all_code = logic_fx()
     for code in all_code:
         print(code)
         # print(code.split('.')[0])

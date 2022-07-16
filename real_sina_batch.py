@@ -24,6 +24,16 @@ else:
 wb = Workbook()
 ws = wb.active
 
+import gen_finding_from_bao
+
+protect_bottom = []
+bao_history = {}
+files = gen_finding_from_bao.get_all_files()
+for f in files:
+    data = gen_finding_from_bao.load_data(f)
+    data.reverse()
+    bao_history[data[0].name] = data
+
 all_org_codes = comlib.get_orign_codes_from_xl()
 all_sd_codes = comlib.get_sd_codes_from_xl()
 all_codes = all_org_codes + all_sd_codes
@@ -70,6 +80,13 @@ for one in all_result:
     buy_1 = content_array[10]
     sell_1 = content_array[20]
     gap = (float(now_price) - float(yesterday_close_prise)) * 100 / float(yesterday_close_prise)
+    tmparr = orign.split('.')
+    tmpcode = '{0}.{1}'.format(tmparr[1],tmparr[0]).lower()
+
+    if tmpcode in bao_history:
+        item = bao_history[tmpcode]
+        if item[0].high<item[1].high and item[0].low<item[1].low and low_price>item[0].low:
+            protect_bottom.append(orign)
 
     ws["A{0}".format(index)] = name
     ws["B{0}".format(index)] = orign
@@ -105,4 +122,6 @@ for one in all_result:
             ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="99CC00")
         continue
 
+for hit in protect_bottom:
+    print(hit)
 wb.save(fileout)

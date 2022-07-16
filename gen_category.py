@@ -141,7 +141,7 @@ def meet_high_condition(source_sheet, index):
             if total_num > max_num:
                 max_num = total_num
             total_num = 0
-    return max_num >= 6
+    return max_num >= 5
 
 
 def generate_top_sheet():

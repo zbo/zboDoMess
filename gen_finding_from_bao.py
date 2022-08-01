@@ -92,6 +92,8 @@ def logic_fx():
     #print('search fx total {0} files found in bao'.format(len(files)))
     for f in files:
         data = load_data(f)
+        if len(data)<2:
+            continue
         data.reverse()
         hit_bottom = data[1].low <= data[2].low and data[1].high <= data[2].high
         protect_bottom = data[0].low >= data[1].low

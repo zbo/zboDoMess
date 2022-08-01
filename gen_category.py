@@ -85,6 +85,7 @@ def copy_title(target_sheet, source_sheet):
         target_cell = target_sheet.cell(row=1, column=c)
         source_cell = source_sheet.cell(row=1, column=c)
         target_cell.value = source_cell.value
+        # target_cell.fill = PatternFill("solid", fgColor=source_cell.fill.fgColor, bgColor=source_cell.fill.bgColor)
         target_cell.fill = PatternFill("solid", fgColor=source_cell.fill.fgColor)
         thin = Side(border_style="thin", color="000000")
         target_cell.border = Border(top=thin, left=thin, right=thin, bottom=thin)

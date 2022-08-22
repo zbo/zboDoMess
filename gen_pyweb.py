@@ -23,6 +23,7 @@ with open('reduced.csv', 'r') as f:
     reader = csv.reader(f)
     for row in reader:
         code = row[0]
+        code_orign  = code
         if code[0] != 's':
             num = code.split('.')[0]
             mkt = code.split('.')[1]
@@ -37,7 +38,7 @@ with open('reduced.csv', 'r') as f:
         if row[0] in cate_dict:
             cate = cate_dict[row[0]]
         print('<a>{0}</a>'.format(cate))
-        print('<input id ="{0}" type="checkbox"/>'.format(code))
+        print('<input id ="{0}" type="checkbox"/>'.format(code_orign))
         #print('<input id="Radio1" name="group01" type="radio" /><label for="Radio1">多</label><input id="Radio2" name="group01" type="radio" /><label for="Radio2">空</label></p>')
         print(image_template.format(code, code))
 print('<p id="result2"></p>')

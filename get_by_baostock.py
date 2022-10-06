@@ -18,7 +18,7 @@ else:
 def get_single(code):
     rs = bs.query_history_k_data_plus(code,
                                       "date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,isST",
-                                      start_date='2022-05-13', end_date='2022-12-31',
+                                      start_date='2022-09-01', end_date='2022-12-31',
                                       frequency="d", adjustflag="3")
     data_list = []
     while (rs.error_code == '0') & rs.next():

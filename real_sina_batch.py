@@ -77,8 +77,9 @@ for one in all_result:
     now_price = content_array[3]
     high_price = content_array[4]
     low_price = content_array[5]
-    buy_1 = content_array[10]
-    sell_1 = content_array[20]
+    buy_1_volume = int(content_array[10])
+    buy_1_price = float(content_array[11])
+    sell_1_volume = int(content_array[20])
     gap = (float(now_price) - float(yesterday_close_prise)) * 100 / float(yesterday_close_prise)
     tmparr = orign.split('.')
     tmpcode = '{0}.{1}'.format(tmparr[1],tmparr[0]).lower()
@@ -97,12 +98,17 @@ for one in all_result:
     ws.column_dimensions['B'].width = 3
     ws.column_dimensions['C'].width = 3
     # fill in color
-    # if buy_1 == '0':
-    #     ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="000001")
-    #     continue
-    # if sell_1 == '0':
-    #     ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="FF0000")
-    #     continue
+    #'ZT logic change text to voulme'
+    if sell_1_volume == 0:
+        vo = buy_1_price*buy_1_volume
+        if vo>= 100000000:
+            vo = '{:.1f}'.format(vo/100000000)+'Y'
+        elif vo>1000000:
+            vo = '{:.1f}'.format(vo/10000000)+'K'
+        else:
+            vo = '{:.1f}'.format(vo/10000)
+        ws["C{0}".format(index)] = vo
+
     if float(now_price) > float(yesterday_close_prise):
         ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="ec7c24")
         if gap > 9:
@@ -121,7 +127,7 @@ for one in all_result:
         elif gap > -1.5:
             ws["C{0}".format(index)].fill = PatternFill("solid", fgColor="99CC00")
         continue
-
+    
 for hit in protect_bottom:
     print(hit)
 wb.save(fileout)

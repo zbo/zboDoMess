@@ -96,7 +96,7 @@ def logic_fx():
             continue
         data.reverse()
         hit_bottom = data[1].low <= data[2].low and data[1].high <= data[2].high
-        protect_bottom = data[0].low >= data[1].low
+        protect_bottom = data[0].low >= data[1].low and data[0].high >= data[1].high
         if hit_bottom and protect_bottom:
             arr = f.split('.')
             code_list.append('{0}.{1}'.format(arr[0], arr[1]))
